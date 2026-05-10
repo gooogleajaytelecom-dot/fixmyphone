@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FixMyPhone - Doorstep Mobile Repair</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .brand-card:hover { transform: scale(1.05); }
+        .issue-selected { border-color: #2563eb !important; background-color: #eff6ff !important; }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+<!-- ==================== HEADER ==================== -->
+<header class="bg-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center cursor-pointer" onclick="showPage('home')">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center mr-3 text-white text-xl">🔧</div>
+                <div>
+                    <h1 class="text-xl font-bold text-blue-600">FixMyPhone</h1>
+                    <p class="text-xs text-gray-500">Doorstep Repair</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-6">
+                <button onclick="showPage('home')" class="text-gray-700 hover:text-blue-600 font-medium">Home</button>
+                <button onclick="showPage('track')" class="text-gray-700 hover:text-blue-600 font-medium">Track Order</button>
+                <button onclick="showPage('brands')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Book Now</button>
+                <button onclick="toggleAdmin()" class="text-gray-500 text-sm border px-3 py-1 rounded">Admin</button>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- ==================== HOME PAGE ==================== -->
+<div id="page-home" class="page">
+    <!-- Hero -->
+    <div class="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="inline-flex items-center bg-white/20 rounded-full px-4 py-2 mb-6 text-sm">
+                ⭐ 4.9 Rating | 10,000+ Repairs
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Expert Mobile Repair<br>At Your Doorstep</h1>
+            <p class="text-xl mb-8 text-blue-100">Technician at your home in 30 minutes. Genuine parts. 6-month warranty.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="showPage('brands')" class="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold text-lg hover:shadow-xl">Book Repair Now</button>
+                <a href="https://wa.me/919876543210" class="bg-green-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-green-600 flex items-center justify-center gap-2">💬 WhatsApp Us</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div class="py-16 max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Why Choose FixMyPhone?</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-2xl shadow-md text-center">
+                <div class="text-4xl mb-4">⚡</div>
+                <h3 class="text-xl font-bold mb-2">30 Min Response</h3>
+                <p class="text-gray-600">Technician at your door within 30 minutes</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-md text-center">
+                <div class="text-4xl mb-4">🛡️</div>
+                <h3 class="text-xl font-bold mb-2">6 Month Warranty</h3>
+                <p class="text-gray-600">All repairs with warranty on parts</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-md text-center">
+                <div class="text-4xl mb-4">📍</div>
+                <h3 class="text-xl font-bold mb-2">Live Tracking</h3>
+                <p class="text-gray-600">Track technician in real-time</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-md text-center">
+                <div class="text-4xl mb-4">💰</div>
+                <h3 class="text-xl font-bold mb-2">Best Price</h3>
+                <p class="text-gray-600">40% cheaper than service centers</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-md text-center">
+                <div class="text-4xl mb-4">✅</div>
+                <h3 class="text-xl font-bold mb-2">Genuine Parts</h3>
+                <p class="text-gray-600">Only OEM replacement parts</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-md text-center">
+                <div class="text-4xl mb-4">👨‍🔧</div>
+                <h3 class="text-xl font-bold mb-2">Expert Technicians</h3>
+                <p class="text-gray-600">Certified professionals</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">How It Works</h2>
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">1️⃣</div>
+                    <h3 class="font-bold mb-2">Select Phone</h3>
+                    <p class="text-gray-600 text-sm">Choose your brand and model</p>
+                </div>
+                <div>
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">2️⃣</div>
+                    <h3 class="font-bold mb-2">Pick Issue</h3>
+                    <p class="text-gray-600 text-sm">Select the problem</p>
+                </div>
+                <div>
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">3️⃣</div>
+                    <h3 class="font-bold mb-2">Book Service</h3>
+                    <p class="text-gray-600 text-sm">Enter your address</p>
+                </div>
+                <div>
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">4️⃣</div>
+                    <h3 class="font-bold mb-2">We Come to You</h3>
+                    <p class="text-gray-600 text-sm">Technician repairs at home</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== BRAND SELECTION ==================== -->
+<div id="page-brands" class="page hidden">
+    <div class="max-w-7xl mx-auto px-4 py-12">
+        <button onclick="showPage('home')" class="flex items-center text-gray-600 hover:text-blue-600 mb-6">← Back to Home</button>
+        <h2 class="text-3xl font-bold mb-2">Select Your Brand</h2>
+        <p class="text-gray-600 mb-8">Choose your mobile phone brand</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4" id="brands-grid"></div>
+    </div>
+</div>
+
+<!-- ==================== MODEL SELECTION ==================== -->
+<div id="page-models" class="page hidden">
+    <div class="max-w-7xl mx-auto px-4 py-12">
+        <button onclick="showPage('brands')" class="flex items-center text-gray-600 hover:text-blue-600 mb-6">← Back to Brands</button>
+        <div class="flex items-center gap-4 mb-6">
+            <div id="selected-brand-icon" class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"></div>
+            <div>
+                <h2 class="text-3xl font-bold" id="selected-brand-name"></h2>
+                <p class="text-gray-600">Select your model</p>
+            </div>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4" id="models-grid"></div>
+    </div>
+</div>
+
+<!-- ==================== ISSUE SELECTION ==================== -->
+<div id="page-issues" class="page hidden">
+    <div class="max-w-4xl mx-auto px-4 py-12">
+        <button onclick="showPage('models')" class="flex items-center text-gray-600 hover:text-blue-600 mb-6">← Back to Models</button>
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-6 mb-8 text-white">
+            <h2 class="text-2xl font-bold" id="issue-header"></h2>
+            <p class="text-blue-100">Select the issues you're facing</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4 mb-8" id="issues-grid"></div>
+        <div id="issue-continue" class="hidden">
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-4">Describe Your Issue (Optional)</h3>
+                <textarea id="issue-desc" class="w-full p-4 border border-gray-300 rounded-xl h-32 resize-none" placeholder="Describe when the problem started..."></textarea>
+                <button onclick="showPage('customer-form')" class="w-full mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-xl font-bold text-lg hover:shadow-xl">Continue to Booking →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== CUSTOMER FORM ==================== -->
+<div id="page-customer-form" class="page hidden">
+    <div class="max-w-2xl mx-auto px-4 py-12">
+        <button onclick="showPage('issues')" class="flex items-center text-gray-600 hover:text-blue-600 mb-6">← Back</button>
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+            <h2 class="text-2xl font-bold mb-6">Your Details</h2>
+            <div class="mb-6 p-4 bg-gray-50 rounded-xl">
+                <p class="font-semibold" id="form-summary"></p>
+            </div>
+            <form onsubmit="submitBooking(event)">
+                <div class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                        <input type="text" id="cust-name" required class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="Enter your full name">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                        <input type="tel" id="cust-phone" required pattern="[0-9]{10}" class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="10-digit mobile number">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Address *</label>
+                        <textarea id="cust-address" required class="w-full p-3 border border-gray-300 rounded-xl h-24 resize-none" placeholder="Complete address with landmark"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Time</label>
+                        <select id="cust-time" class="w-full p-3 border border-gray-300 rounded-xl">
+                            <option>As soon as possible</option>
+                            <option>Today Evening (4PM - 8PM)</option>
+                            <option>Tomorrow Morning (9AM - 12PM)</option>
+                            <option>Tomorrow Afternoon (12PM - 4PM)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-xl font-bold text-lg hover:shadow-xl">Submit Repair Request</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== CONFIRMATION ==================== -->
+<div id="page-confirmation" class="page hidden">
+    <div class="max-w-2xl mx-auto px-4 py-12 text-center">
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">✅</div>
+            <h2 class="text-3xl font-bold mb-2">Booking Confirmed!</h2>
+            <p class="text-gray-600 mb-6">Your request has been submitted successfully.</p>
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 text-white mb-6">
+                <p class="text-sm opacity-90 mb-1">Your Order ID</p>
+                <p class="text-3xl font-bold tracking-wider" id="order-id-display"></p>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-6 mb-6 text-left">
+                <h3 class="font-bold text-lg mb-4">Technician Assigned</h3>
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-2xl">👨‍🔧</div>
+                    <div>
+                        <p class="font-bold text-lg" id="tech-name"></p>
+                        <p class="text-sm text-gray-600">⭐ 4.8 • 1200+ repairs</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white p-3 rounded-lg">
+                        <p class="text-sm text-gray-500">Contact</p>
+                        <p class="font-semibold">📞 +91 98765 43210</p>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg">
+                        <p class="text-sm text-gray-500">Est. Arrival</p>
+                        <p class="font-semibold">⏱️ 30 mins</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <button onclick="trackThisOrder()" class="flex-1 bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700">Track Status</button>
+                <a href="https://wa.me/919876543210" class="flex-1 bg-green-500 text-white py-3 rounded-xl font-semibold hover:bg-green-600 flex items-center justify-center gap-2">💬 WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== TRACK ORDER ==================== -->
+<div id="page-track" class="page hidden">
+    <div class="max-w-2xl mx-auto px-4 py-20">
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">🔍</div>
+                <h2 class="text-2xl font-bold">Track Your Repair</h2>
+                <p class="text-gray-600">Enter your Order ID</p>
+            </div>
+            <div class="flex gap-3">
+                <input type="text" id="track-input" placeholder="e.g., ORD-240510-001" class="flex-1 p-4 border border-gray-300 rounded-xl text-lg uppercase">
+                <button onclick="trackOrder()" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700">Track</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== TRACKING RESULT ==================== -->
+<div id="page-tracking-result" class="page hidden">
+    <div class="max-w-4xl mx-auto px-4 py-12">
+        <button onclick="showPage('track')" class="flex items-center text-gray-600 hover:text-blue-600 mb-6">← Back</button>
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="text-2xl font-bold">Track Your Repair</h2>
+                    <p class="text-gray-600" id="track-order-id"></p>
+                </div>
+                <div id="track-status-badge" class="px-4 py-2 rounded-full text-sm font-bold bg-yellow-100 text-yellow-700"></div>
+            </div>
+            <div class="mb-8">
+                <div class="flex items-center justify-between relative">
+                    <div class="absolute top-6 left-0 right-0 h-1 bg-gray-200 -z-10"></div>
+                    <div id="progress-bar" class="absolute top-6 left-0 h-1 bg-blue-600 -z-10 transition-all" style="width: 0%"></div>
+                    <div class="flex flex-col items-center z-10" id="step-0">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-2">📥</div>
+                        <span class="text-xs font-medium">Received</span>
+                    </div>
+                    <div class="flex flex-col items-center z-10" id="step-1">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-2">👨‍🔧</div>
+                        <span class="text-xs font-medium">Assigned</span>
+                    </div>
+                    <div class="flex flex-col items-center z-10" id="step-2">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-2">🚗</div>
+                        <span class="text-xs font-medium">On The Way</span>
+                    </div>
+                    <div class="flex flex-col items-center z-10" id="step-3">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-2">🔧</div>
+                        <span class="text-xs font-medium">In Progress</span>
+                    </div>
+                    <div class="flex flex-col items-center z-10" id="step-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-2">✅</div>
+                        <span class="text-xs font-medium">Completed</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-6">
+                <h3 class="font-bold mb-4">Order Details</h3>
+                <div class="grid md:grid-cols-2 gap-4" id="track-details"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== ADMIN PANEL ==================== -->
+<div id="page-admin" class="page hidden">
+    <div class="min-h-screen bg-gray-100">
+        <div class="bg-gray-900 text-white p-4">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">🔧</span>
+                    <span class="text-xl font-bold">Admin Panel</span>
+                </div>
+                <button onclick="toggleAdmin()" class="text-sm bg-red-600 px-4 py-2 rounded hover:bg-red-700">Exit Admin</button>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto p-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="text-3xl mb-2">📱</div>
+                    <p class="text-3xl font-bold" id="stat-total">0</p>
+                    <p class="text-gray-500">Total Orders</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="text-3xl mb-2">⏳</div>
+                    <p class="text-3xl font-bold" id="stat-pending">0</p>
+                    <p class="text-gray-500">Pending</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="text-3xl mb-2">🔧</div>
+                    <p class="text-3xl font-bold" id="stat-progress">0</p>
+                    <p class="text-gray-500">In Progress</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="text-3xl mb-2">✅</div>
+                    <p class="text-3xl font-bold" id="stat-completed">0</p>
+                    <p class="text-gray-500">Completed</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-6 border-b">
+                    <h2 class="text-xl font-bold">All Orders</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Order ID</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Customer</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Device</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Status</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-orders-table" class="divide-y"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="bg-gray-900 text-white py-12 mt-12">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="text-2xl">🔧</span>
+                    <span class="text-xl font-bold">FixMyPhone</span>
+                </div>
+                <p class="text-gray-400 text-sm">Professional doorstep mobile repair across India.</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Services</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li>Screen Replacement</li>
+                    <li>Battery Repair</li>
+                    <li>Water Damage</li>
+                    <li>Software Issues</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Support</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li>Track Order</li>
+                    <li>Warranty Info</li>
+                    <li>Contact Us</li>
+                    <li>FAQs</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Contact</h4>
+                <div class="flex gap-4">
+                    <a href="https://wa.me/919876543210" class="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center hover:bg-green-700">💬</a>
+                    <a href="tel:+919876543210" class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700">📞</a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
+            © 2024 FixMyPhone. All rights reserved.
+        </div>
+    </div>
+</footer>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+// Data
+const BRANDS = [
+    {id:'apple',name:'Apple iPhone',icon:'🍎',color:'bg-gray-900'},
+    {id:'samsung',name:'Samsung',icon:'📱',color:'bg-blue-600'},
+    {id:'xiaomi',name:'Xiaomi',icon:'🟠',color:'bg-orange-500'},
+    {id:'redmi',name:'Redmi',icon:'🔴',color:'bg-red-500'},
+    {id:'poco',name:'Poco',icon:'🟡',color:'bg-yellow-500'},
+    {id:'oppo',name:'Oppo',icon:'🟢',color:'bg-green-500'},
+    {id:'vivo',name:'Vivo',icon:'🔵',color:'bg-blue-500'},
+    {id:'realme',name:'Realme',icon:'🟡',color:'bg-yellow-400'},
+    {id:'oneplus',name:'OnePlus',icon:'➕',color:'bg-red-600'},
+    {id:'motorola',name:'Motorola',icon:'📟',color:'bg-blue-800'},
+    {id:'nokia',name:'Nokia',icon:'🔷',color:'bg-blue-700'},
+    {id:'nothing',name:'Nothing',icon:'⚫',color:'bg-black'},
+];
+
+const MODELS = {
+    apple:['iPhone 15 Pro Max','iPhone 15 Pro','iPhone 15 Plus','iPhone 15','iPhone 14 Pro Max','iPhone 14 Pro','iPhone 14 Plus','iPhone 14','iPhone 13 Pro Max','iPhone 13 Pro','iPhone 13','iPhone 12 Pro Max','iPhone 12','iPhone 11 Pro Max','iPhone 11','iPhone SE 2022'],
+    samsung:['Galaxy S24 Ultra','Galaxy S24+','Galaxy S24','Galaxy S23 Ultra','Galaxy S23+','Galaxy S23','Galaxy Z Fold 5','Galaxy Z Flip 5','Galaxy A54','Galaxy A34','Galaxy M54','Galaxy F54'],
+    xiaomi:['Xiaomi 14 Ultra','Xiaomi 14','Xiaomi 13 Pro','Xiaomi 13','Xiaomi 12 Pro','Xiaomi 12','Redmi Note 13 Pro+','Redmi Note 13 Pro','Redmi Note 13','Redmi 12','POCO F6 Pro','POCO F6'],
+    redmi:['Redmi Note 13 Pro+','Redmi Note 13 Pro','Redmi Note 13','Redmi Note 12 Pro+','Redmi Note 12 Pro','Redmi Note 12','Redmi 13C','Redmi 12','Redmi 11 Prime'],
+    poco:['POCO F6 Pro','POCO F6','POCO X6 Pro','POCO X6','POCO M6 Pro','POCO M6','POCO C65','POCO C55'],
+    oppo:['Find X7 Ultra','Find X7','Reno 11 Pro','Reno 11','Reno 10 Pro+','Reno 10','F25 Pro','F23','A79','A78','A58'],
+    vivo:['X100 Pro','X100','V30 Pro','V30','V29 Pro','V29','Y200','Y100','Y78','T2 Pro','T2','T1'],
+    realme:['GT 6','GT 6T','12 Pro+','12 Pro','12','11 Pro+','11 Pro','11','Narzo 70 Pro','Narzo 70','C67'],
+    oneplus:['OnePlus 12','OnePlus 12R','OnePlus Open','OnePlus 11','OnePlus 11R','OnePlus 10 Pro','OnePlus 10T','OnePlus Nord 3','OnePlus Nord CE 3','OnePlus Nord N30'],
+    motorola:['Edge 50 Ultra','Edge 50 Pro','Edge 50 Fusion','Edge 40 Neo','Edge 40','G84','G54','G34','Razr 40 Ultra'],
+    nokia:['G60','G42','G22','C32','C22','C12','XR21','X30','G400'],
+    nothing:['Phone (2a)','Phone (2)','Phone (1)'],
+};
+
+const ISSUES = [
+    {id:'display',name:'Display Broken',price:'₹1,500 - ₹15,000',icon:'📱'},
+    {id:'touch',name:'Touch Not Working',price:'₹1,200 - ₹12,000',icon:'👆'},
+    {id:'battery',name:'Battery Issue',price:'₹800 - ₹4,000',icon:'🔋'},
+    {id:'charging',name:'Charging Problem',price:'₹500 - ₹3,000',icon:'⚡'},
+    {id:'camera',name:'Camera Issue',price:'₹1,000 - ₹8,000',icon:'📷'},
+    {id:'speaker',name:'Speaker Problem',price:'₹400 - ₹2,500',icon:'🔊'},
+    {id:'mic',name:'Mic Issue',price:'₹400 - ₹2,000',icon:'🎤'},
+    {id:'water',name:'Water Damage',price:'₹1,000 - ₹10,000',icon:'💧'},
+    {id:'dead',name:'Dead Phone',price:'₹1,500 - ₹12,000',icon:'⚰️'},
+    {id:'software',name:'Software Issue',price:'₹300 - ₹2,000',icon:'💻'},
+    {id:'network',name:'Network Issue',price:'₹500 - ₹4,000',icon:'📡'},
+    {id:'backglass',name:'Back Glass Broken',price:'₹800 - ₹5,000',icon:'🔙'},
+];
+
+const TECHNICIANS = [
+    {name:'Rahul Sharma',phone:'+91 98765 43210',rating:4.8,repairs:1240},
+    {name:'Amit Kumar',phone:'+91 98765 43211',rating:4.9,repairs:980},
+    {name:'Priya Patel',phone:'+91 98765 43212',rating:4.7,repairs:856},
+    {name:'Vikram Singh',phone:'+91 98765 43213',rating:4.8,repairs:1100},
+];
+
+// State
+let currentBrand = null;
+let currentModel = null;
+let selectedIssues = [];
+let orders = JSON.parse(localStorage.getItem('fixmyphone_orders') || '[]');
+let currentOrderId = null;
+
+// Initialize
+if (orders.length === 0) {
+    orders = [
+        {id:'ORD-240510-001',customerName:'Rajesh Kumar',phone:'+91 98765 12345',brand:'Apple iPhone',model:'iPhone 15 Pro Max',issues:['Display Broken'],status:'completed',technician:TECHNICIANS[0],price:'₹15,000'},
+        {id:'ORD-240510-002',customerName:'Sneha Gupta',phone:'+91 98765 67890',brand:'Samsung',model:'Galaxy S24 Ultra',issues:['Battery Issue','Charging Problem'],status:'inprogress',technician:TECHNICIANS[1],price:'₹4,500'},
+        {id:'ORD-240510-003',customerName:'Arun Reddy',phone:'+91 98765 11111',brand:'OnePlus',model:'OnePlus 12',issues:['Camera Issue'],status:'ontheway',technician:TECHNICIANS[2],price:'₹3,500'},
+    ];
+    saveOrders();
+}
+
+function saveOrders() {
+    localStorage.setItem('fixmyphone_orders', JSON.stringify(orders));
+}
+
+function showPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+    document.getElementById('page-' + page).classList.remove('hidden');
+    document.getElementById('page-' + page).classList.add('fade-in');
+    window.scrollTo(0, 0);
+}
+
+function toggleAdmin() {
+    if (document.getElementById('page-admin').classList.contains('hidden')) {
+        showPage('admin');
+        updateAdminStats();
+        renderAdminOrders();
+    } else {
+        showPage('home');
+    }
+}
+
+// Render Brands
+function renderBrands() {
+    const grid = document.getElementById('brands-grid');
+    grid.innerHTML = BRANDS.map(b => `
+        <button onclick="selectBrand('${b.id}')" class="brand-card bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition flex flex-col items-center gap-3">
+            <div class="w-16 h-16 ${b.color} rounded-2xl flex items-center justify-center text-3xl shadow-lg">${b.icon}</div>
+            <span class="font-semibold text-gray-800 text-sm">${b.name}</span>
+        </button>
+    `).join('');
+}
+
+function selectBrand(brandId) {
+    currentBrand = BRANDS.find(b => b.id === brandId);
+    document.getElementById('selected-brand-icon').className = `w-12 h-12 ${currentBrand.color} rounded-xl flex items-center justify-center text-2xl`;
+    document.getElementById('selected-brand-icon').textContent = currentBrand.icon;
+    document.getElementById('selected-brand-name').textContent = currentBrand.name;
+    renderModels();
+    showPage('models');
+}
+
+// Render Models
+function renderModels() {
+    const grid = document.getElementById('models-grid');
+    const models = MODELS[currentBrand.id] || [];
+    grid.innerHTML = models.map(m => `
+        <button onclick="selectModel('${m}')" class="bg-white p-5 rounded-xl shadow-md hover:shadow-xl transition flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl">📱</span>
+                <span class="font-semibold text-gray-800">${m}</span>
+            </div>
+            <span class="text-gray-400">→</span>
+        </button>
+    `).join('');
+}
+
+function selectModel(model) {
+    currentModel = model;
+    document.getElementById('issue-header').textContent = `${currentBrand.name} ${currentModel}`;
+    selectedIssues = [];
+    renderIssues();
+    showPage('issues');
+}
+
+// Render Issues
+function renderIssues() {
+    const grid = document.getElementById('issues-grid');
+    grid.innerHTML = ISSUES.map(i => `
+        <button onclick="toggleIssue('${i.id}')" id="issue-${i.id}" class="p-5 rounded-xl border-2 border-gray-200 bg-white hover:border-blue-300 transition flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="p-2 rounded-lg bg-gray-100 text-2xl">${i.icon}</div>
+                <div class="text-left">
+                    <h3 class="font-semibold">${i.name}</h3>
+                    <p class="text-sm text-gray-500">${i.price}</p>
+                </div>
+            </div>
+            <div class="w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center" id="check-${i.id}"></div>
+        </button>
+    `).join('');
+    document.getElementById('issue-continue').classList.add('hidden');
+}
+
+function toggleIssue(issueId) {
+    const idx = selectedIssues.indexOf(issueId);
+    if (idx > -1) {
+        selectedIssues.splice(idx, 1);
+        document.getElementById('issue-' + issueId).classList.remove('issue-selected');
+        document.getElementById('check-' + issueId).innerHTML = '';
+    } else {
+        selectedIssues.push(issueId);
+        document.getElementById('issue-' + issueId).classList.add('issue-selected');
+        document.getElementById('check-' + issueId).innerHTML = '✓';
+    }
+
+    if (selectedIssues.length > 0) {
+        document.getElementById('issue-continue').classList.remove('hidden');
+        const issueNames = selectedIssues.map(id => ISSUES.find(i => i.id === id).name);
+        document.getElementById('form-summary').textContent = `${currentBrand.name} ${currentModel} - ${issueNames.join(', ')}`;
+    } else {
+        document.getElementById('issue-continue').classList.add('hidden');
+    }
+}
+
+// Submit Booking
+function submitBooking(e) {
+    e.preventDefault();
+
+    const date = new Date();
+    const orderId = 'ORD-' + date.toISOString().slice(2,10).replace(/-/g,'') + '-' + Math.floor(Math.random()*999).toString().padStart(3,'0');
+    const tech = TECHNICIANS[Math.floor(Math.random() * TECHNICIANS.length)];
+
+    const order = {
+        id: orderId,
+        customerName: document.getElementById('cust-name').value,
+        phone: document.getElementById('cust-phone').value,
+        address: document.getElementById('cust-address').value,
+        brand: currentBrand.name,
+        model: currentModel,
+        issues: selectedIssues.map(id => ISSUES.find(i => i.id === id).name),
+        description: document.getElementById('issue-desc').value,
+        status: 'received',
+        technician: tech,
+        price: 'Will be confirmed after inspection',
+        createdAt: date.toISOString()
+    };
+
+    orders.unshift(order);
+    saveOrders();
+
+    currentOrderId = orderId;
+    document.getElementById('order-id-display').textContent = orderId;
+    document.getElementById('tech-name').textContent = tech.name;
+
+    // Reset form
+    document.getElementById('cust-name').value = '';
+    document.getElementById('cust-phone').value = '';
+    document.getElementById('cust-address').value = '';
+    document.getElementById('issue-desc').value = '';
+    selectedIssues = [];
+
+    showPage('confirmation');
+}
+
+function trackThisOrder() {
+    document.getElementById('track-input').value = currentOrderId;
+    trackOrder();
+}
+
+// Track Order
+function trackOrder() {
+    const orderId = document.getElementById('track-input').value.trim();
+    const order = orders.find(o => o.id.toLowerCase() === orderId.toLowerCase());
+
+    if (!order) {
+        alert('Order not found. Please check your Order ID.');
+        return;
+    }
+
+    document.getElementById('track-order-id').textContent = 'Order ID: ' + order.id;
+
+    const statuses = ['received', 'assigned', 'ontheway', 'inprogress', 'completed'];
+    const currentIdx = statuses.indexOf(order.status);
+    const colors = {received:'bg-yellow-100 text-yellow-700', assigned:'bg-orange-100 text-orange-700', ontheway:'bg-purple-100 text-purple-700', inprogress:'bg-blue-100 text-blue-700', completed:'bg-green-100 text-green-700'};
+    const labels = {received:'Request Received', assigned:'Technician Assigned', ontheway:'On The Way', inprogress:'Repair In Progress', completed:'Repair Completed'};
+
+    document.getElementById('track-status-badge').className = `px-4 py-2 rounded-full text-sm font-bold ${colors[order.status]}`;
+    document.getElementById('track-status-badge').textContent = labels[order.status];
+
+    // Update progress steps
+    for (let i = 0; i <= 4; i++) {
+        const step = document.getElementById('step-' + i);
+        const circle = step.querySelector('div');
+        if (i <= currentIdx) {
+            circle.className = 'w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center mb-2 shadow-lg';
+        } else {
+            circle.className = 'w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-2';
+        }
+    }
+
+    document.getElementById('progress-bar').style.width = (currentIdx / 4 * 100) + '%';
+
+    document.getElementById('track-details').innerHTML = `
+        <div><p class="text-sm text-gray-500">Device</p><p class="font-semibold">${order.brand} ${order.model}</p></div>
+        <div><p class="text-sm text-gray-500">Issues</p><p class="font-semibold">${order.issues.join(', ')}</p></div>
+        <div><p class="text-sm text-gray-500">Technician</p><p class="font-semibold">${order.technician.name}</p></div>
+        <div><p class="text-sm text-gray-500">Price</p><p class="font-semibold">${order.price}</p></div>
+    `;
+
+    showPage('tracking-result');
+}
+
+// Admin Functions
+function updateAdminStats() {
+    document.getElementById('stat-total').textContent = orders.length;
+    document.getElementById('stat-pending').textContent = orders.filter(o => ['received','assigned'].includes(o.status)).length;
+    document.getElementById('stat-progress').textContent = orders.filter(o => ['ontheway','inprogress'].includes(o.status)).length;
+    document.getElementById('stat-completed').textContent = orders.filter(o => o.status === 'completed').length;
+}
+
+function renderAdminOrders() {
+    const tbody = document.getElementById('admin-orders-table');
+    const colors = {received:'bg-yellow-100 text-yellow-700', assigned:'bg-orange-100 text-orange-700', ontheway:'bg-purple-100 text-purple-700', inprogress:'bg-blue-100 text-blue-700', completed:'bg-green-100 text-green-700'};
+    const labels = {received:'Received', assigned:'Assigned', ontheway:'On Way', inprogress:'In Progress', completed:'Completed'};
+
+    tbody.innerHTML = orders.map(o => `
+        <tr class="hover:bg-gray-50">
+            <td class="px-6 py-4 font-mono text-sm font-semibold">${o.id}</td>
+            <td class="px-6 py-4">
+                <p class="font-semibold text-sm">${o.customerName}</p>
+                <p class="text-xs text-gray-500">${o.phone}</p>
+            </td>
+            <td class="px-6 py-4 text-sm">${o.brand} ${o.model}</td>
+            <td class="px-6 py-4">
+                <select onchange="updateStatus('${o.id}', this.value)" class="px-3 py-1 rounded-full text-xs font-bold border-0 ${colors[o.status]}">
+                    ${Object.keys(labels).map(s => `<option value="${s}" ${o.status===s?'selected':''}>${labels[s]}</option>`).join('')}
+                </select>
+            </td>
+            <td class="px-6 py-4">
+                <button onclick="viewOrder('${o.id}')" class="text-blue-600 hover:underline text-sm">View</button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function updateStatus(orderId, newStatus) {
+    const order = orders.find(o => o.id === orderId);
+    if (order) {
+        order.status = newStatus;
+        saveOrders();
+        updateAdminStats();
+        renderAdminOrders();
+    }
+}
+
+function viewOrder(orderId) {
+    document.getElementById('track-input').value = orderId;
+    trackOrder();
+}
+
+// Initialize on load
+renderBrands();
+showPage('home');
+</script>
+</body>
+</html>
